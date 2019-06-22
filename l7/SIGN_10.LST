@@ -1,0 +1,72 @@
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-1
+
+
+       1				PUBLIC S10
+       2				
+       3				EXTRN  U10 : NEAR
+       4				
+       5 0000				CSEG	SEGMENT PARA PUBLIC 'CODE'
+       6					ASSUME CS:CSEG
+       7						
+       8 0000				S10	PROC NEAR
+       9 0000  55				PUSH BP
+      10 0001  8B EC				MOV  BP, SP
+      11						
+      12 0003  8B 4E 04				MOV  CX, [BP + 4]
+      13 0006  8B 5E 06				MOV  BX, [BP + 6]
+      14						
+      15 0009  80 F9 00				CMP  CL, 0
+      16 000C  74 08				JE   SKIP_NEG
+      17						
+      18 000E  B4 02				MOV  AH, 2
+      19 0010  B2 2D				MOV  DL, '-'
+      20 0012  CD 21				INT  21H
+      21						
+      22 0014  F7 DB				NEG  BX
+      23						
+      24 0016				SKIP_NEG:
+      25 0016  53				PUSH  BX
+      26 0017  51				PUSH  CX
+      27						
+      28 0018  E8 0000 E			CALL  U10
+      29						
+      30 001B  5D				POP BP
+      31 001C  C2 0004				RET 4
+      32 001F				S10	ENDP
+      33 001F				CSEG	ENDS
+      34				END
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	001F	PARA	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+S10  . . . . . . . . . . . . . .  	N PROC	0000	CSEG	Global	Length = 001F
+SKIP_NEG . . . . . . . . . . . .  	L NEAR	0016	CSEG
+
+U10  . . . . . . . . . . . . . .  	L NEAR	0000		External
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  sign_10		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     34 Source  Lines
+     34 Total   Lines
+     10 Symbols
+
+  46572 + 441344 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

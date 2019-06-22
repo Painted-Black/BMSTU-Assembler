@@ -1,0 +1,85 @@
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-1
+
+
+       1				PUBLIC U2
+       2				
+       3 0000				CSEG	SEGMENT PARA PUBLIC 'CODE'
+       4						ASSUME CS:CSEG
+       5				
+       6 0000				U2		PROC NEAR
+       7				
+       8 0000  55					PUSH BP
+       9 0001  8B EC					MOV  BP, SP
+      10 0003  8B 5E 06					MOV  BX, [BP + 6] ;x
+      11 0006  B9 0010					MOV  CX, 16
+      12 0009  BF 0000					MOV  DI,0
+      13 000C						BEGIN:
+      14 000C  B2 30						MOV  DL, '0'
+      15 000E  D1 E3						SHL BX, 1
+      16 0010  73 05						JNC FIRST_0 ;ес
+					ли перенос (нет переполнения)
+      17 0012  BF 0001						MOV DI,1    ;фл
+					аг для незначащих нулей
+      18 0015  FE C2						INC DL      ;си
+					мвол '1'
+      19 0017						FIRST_0:
+      20 0017  83 FF 00						CMP DI,0    ;не
+					значащие нули
+      21 001A  75 02						JNE PRINT
+      22 001C  E2 EE						LOOP BEGIN
+      23 001E						PRINT:
+      24 001E  B4 02						MOV  AH, 2  ;пе
+					чать символа
+      25 0020  CD 21						INT  21h
+      26 0022  83 F9 00						CMP CX,0
+      27 0025  74 02						JE EXIT
+      28 0027  E2 E3						LOOP BEGIN
+      29 0029						EXIT:
+      30				
+      31 0029  5D					POP BP
+      32				
+      33 002A  C2 0004					RET 4
+      34 002D				U2		ENDP
+      35						
+      36 002D				CSEG	ENDS
+      37				END
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	002D	PARA	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BEGIN  . . . . . . . . . . . . .  	L NEAR	000C	CSEG
+
+EXIT . . . . . . . . . . . . . .  	L NEAR	0029	CSEG
+
+FIRST_0  . . . . . . . . . . . .  	L NEAR	0017	CSEG
+
+PRINT  . . . . . . . . . . . . .  	L NEAR	001E	CSEG
+
+U2 . . . . . . . . . . . . . . .  	N PROC	0000	CSEG	Global	Length = 002D
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  usign_2		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     37 Source  Lines
+     37 Total   Lines
+     12 Symbols
+
+  46572 + 441344 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

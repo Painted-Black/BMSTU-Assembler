@@ -1,0 +1,104 @@
+create_func macro type:req, name:req, list1, list2
+	; REQ – требуется обязательное явное задание фактического аргумента при вызове макрокоманды
+	; Оператор подстановки & предписывает препроцессору заменить в макроопределении имя параметра на его значение
+	name&:
+	; & предписывает препроцессору заменить в макроопределении имя параметра на его значение
+		push ebp
+		mov ebp, esp
+
+		i = 0
+		IFNB <list2>
+			for register, <list2>
+				@CatStr(dumb%i) equ register
+				i = i + 1
+				push register
+		ELSE
+			PUSHR <EBX, ESI, EDI>
+		ENDIF
+
+		IFNB <list1>
+			k = 8
+			IRP PARAM, <list1>
+				PARAM EQU [EBP + k]
+				k = k + 4
+			ENDM
+		ENDIF
+
+		; MOV EBP, ESP ;??
+		; type = TYPE
+		; code
+
+		; push regs
+		IFNB <list2>
+			j = i
+			repeat j
+				i = i - 1
+				pop @CatStr(dumb%i)
+		ELSE
+			POPR <EDI, ESI, EBX>
+		ENDIF
+
+		; return value
+		IFIDN <TYPE>, <VOID>
+			; don't change eax
+		ENDIF
+		IFIDN <TYPE>, <DATA>
+			MOV EAX, ? ; return int
+		ENDIF
+		IFIDN <TYPE>, <PTR>
+			MOV EAX, ? ; return pointer
+		ENDIF
+
+		pop ebp
+		ret
+endm
+
+PUSHR MACRO RG
+	FOR REG, <RG> 
+		IFIDN <REG>, <F>
+			PUSHF
+		ELSE
+			PUSH REG
+		ENDIF
+	ENDM
+ENDM   
+
+POPR MACRO RG
+	FOR REG, <RG>
+		IFIDN <REG>, <F>
+			POPF
+		ELSE
+			POP REG
+		ENDIF
+	ENDM
+ENDM 
+
+XCHG_B MACRO B1,B2
+	XCHG B1,AL
+	XCHG AL,B2
+	XCHG AL,B1
+ENDM
+
+XCHG_D MACRO B1,B2
+	XCHG B1,AX
+	XCHG AX,B2
+	XCHG AX,B1
+ENDM
+
+XCHG_W MACRO B1,B2
+	XCHG B1,EAX
+	XCHG EAX,B2
+	XCHG EAX,B1
+ENDM
+
+module macro name:req
+.386
+.model flat,c
+
+public name&
+.data
+.code
+	name&:
+	ret
+end
+endm

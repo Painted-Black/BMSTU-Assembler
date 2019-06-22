@@ -1,0 +1,138 @@
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-1
+
+
+       1				PUBLIC Print_Menu
+       2				
+       3 0000				DSEG	SEGMENT PARA PUBLIC 'DATA'
+       4 0000  0D 0A 30 2E 20 4F		menu    db 13,10,'0. Otobrazit 
+					menu:'
+       5       74 6F 62 72 61 7A	
+       6       69 74 20 6D 65 6E	
+       7       75 3A			
+       8 0014  0D 0A 31 2E 20 56		        db 13,10,'1. Vvod tcelo
+					go v slovo X'
+       9       76 6F 64 20 74 63	
+      10       65 6C 6F 67 6F 20	
+      11       76 20 73 6C 6F 76	
+      12       6F 20 58			
+      13 002F  0D 0A 32 2E 20 56		        db 13,10,'2. Vivod iz X
+					 kak dvoichnogo tcelogo bez znaka'
+      14       69 76 6F 64 20 69	
+      15       7A 20 58 20 6B 61	
+      16       6B 20 64 76 6F 69	
+      17       63 68 6E 6F 67 6F	
+      18       20 74 63 65 6C 6F	
+      19       67 6F 20 62 65 7A	
+      20       20 7A 6E 61 6B 61	
+      21 005F  0D 0A 33 2E 20 56		        db 13,10,'3. Vivod iz X
+					 kak dvoichnogo tcelogo so znakom'
+      22       69 76 6F 64 20 69	
+      23       7A 20 58 20 6B 61	
+      24       6B 20 64 76 6F 69	
+      25       63 68 6E 6F 67 6F	
+      26       20 74 63 65 6C 6F	
+      27       67 6F 20 73 6F 20	
+      28       7A 6E 61 6B 6F 6D	
+      29 008F  0D 0A 34 2E 20 56		        db 13,10,'4. Vivod iz X
+					 kak desyatichnogo tcelogo bez znaka'
+      30       69 76 6F 64 20 69	
+      31       7A 20 58 20 6B 61	
+      32       6B 20 64 65 73 79	
+      33       61 74 69 63 68 6E	
+      34       6F 67 6F 20 74 63	
+      35       65 6C 6F 67 6F 20	
+      36       62 65 7A 20 7A 6E	
+      37       61 6B 61			
+      38 00C2  0D 0A 35 2E 20 56		        db 13,10,'5. Vivod iz X
+					 kak desyatichnogo tcelogo so znakom'
+      39       69 76 6F 64 20 69	
+      40       7A 20 58 20 6B 61	
+      41       6B 20 64 65 73 79	
+      42       61 74 69 63 68 6E	
+      43       6F 67 6F 20 74 63	
+      44       65 6C 6F 67 6F 20	
+      45       73 6F 20 7A 6E 61	
+      46       6B 6F 6D			
+      47 00F5  0D 0A 36 2E 20 56		        db 13,10,'6. Vivod iz X
+					 kak shestnadtsaterichnogo tcelogo bez 
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-2
+
+
+					znaka'
+      48       69 76 6F 64 20 69	
+      49       7A 20 58 20 6B 61	
+      50       6B 20 73 68 65 73	
+      51       74 6E 61 64 74 73	
+      52       61 74 65 72 69 63	
+      53       68 6E 6F 67 6F 20	
+      54       74 63 65 6C 6F 67	
+      55       6F 20 62 65 7A 20	
+      56       7A 6E 61 6B 61		
+      57 0130  0D 0A 37 2E 20 56		        db 13,10,'7. Vivod iz X
+					 kak shestnadtsaterichnogo tcelogo so z
+					nakom'
+      58       69 76 6F 64 20 69	
+      59       7A 20 58 20 6B 61	
+      60       6B 20 73 68 65 73	
+      61       74 6E 61 64 74 73	
+      62       61 74 65 72 69 63	
+      63       68 6E 6F 67 6F 20	
+      64       74 63 65 6C 6F 67	
+      65       6F 20 73 6F 20 7A	
+      66       6E 61 6B 6F 6D		
+      67 016B  0D 0A 38 2E 20 56		        db 13,10,'8. Vihod iz p
+					rogrammi$'
+      68       69 68 6F 64 20 69	
+      69       7A 20 70 72 6F 67	
+      70       72 61 6D 6D 69 24	
+      71 0183				DSEG	ENDS
+      72				
+      73 0000				CSeg	SEGMENT PARA PUBLIC 'CODE'
+      74					assume CS:CSeg, DS:DSEG	
+      75				
+      76 0000				Print_Menu PROC NEAR
+      77 0000  B4 09				mov  ah,9
+      78 0002  BA 0000 R			mov  dx, offset menu	
+      79 0005  CD 21				int  21h	
+      80 0007  C3				ret
+      81 0008				Print_Menu ENDP
+      82				
+      83 0008				CSeg ENDS
+      84				END 
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	0008	PARA	PUBLIC	'CODE'
+DSEG . . . . . . . . . . . . . .  	0183	PARA	PUBLIC	'DATA'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+MENU . . . . . . . . . . . . . .  	L BYTE	0000	DSEG
+
+PRINT_MENU . . . . . . . . . . .  	N PROC	0000	CSEG	Global	Length = 0008
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  menu		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     26 Source  Lines
+     26 Total   Lines
+     11 Symbols
+
+  46702 + 439166 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

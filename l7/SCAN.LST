@@ -1,0 +1,96 @@
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-1
+
+
+       1				PUBLIC SCAN
+       2				
+       3 0000				DSEG	SEGMENT PARA PUBLIC 'DATA'
+       4 0000  56 76 65 64 69 74		VVOD	DB	'Vvedite chislo
+					: $'
+       5       65 20 63 68 69 73	
+       6       6C 6F 3A 20 24		
+       7 0011				DSEG	ENDS
+       8				
+       9 0000				CSEG	SEGMENT PARA PUBLIC 'CODE'
+      10						ASSUME CS:CSEG
+      11						
+      12 0000				SCAN PROC NEAR
+      13 0000  B4 09				MOV  AH, 9
+      14 0002  BA 0000 R			MOV  DX, OFFSET vvod
+      15 0005  CD 21				INT  21H
+      16 0007  33 DB				XOR  BX,BX
+      17 0009				INPUT:
+      18 0009  B4 01				MOV  AH,1
+      19 000B  CD 21				INT  21H
+      20 000D  3C 0D				CMP  AL,13
+      21 000F  74 19				JE   ENTER
+      22 0011  3C 2D				CMP  AL,'-' 
+      23 0013  75 05				JNE  POSITIVE
+      24 0015  BE 0001				MOV  SI,1
+      25 0018  EB EF				JMP  INPUT
+      26				
+      27 001A				POSITIVE:
+      28 001A  50				PUSH AX
+      29 001B  B8 000A				MOV  AX,10
+      30 001E  F7 E3				MUL  BX
+      31 0020  5B				POP  BX
+      32 0021  80 EB 30				SUB  BL,'0'
+      33 0024  32 FF				XOR  BH,BH
+      34 0026  03 D8				ADD  BX,AX
+      35 0028  EB DF				JMP  INPUT
+      36				
+      37 002A				ENTER:
+      38				
+      39					;MOV  AX,BX
+      40 002A  B8 1200				mov ax, 0001001000000000b
+      41 002D  83 FE 01				CMP  SI,1
+      42 0030  75 02				JNE  EXIT
+      43 0032  F7 D8				NEG  AX
+      44 0034				EXIT:
+      45 0034  C3				RET
+      46						
+      47 0035				SCAN ENDP
+      48				
+      49 0035				CSEG	ENDS
+      50				END
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	0035	PARA	PUBLIC	'CODE'
+DSEG . . . . . . . . . . . . . .  	0011	PARA	PUBLIC	'DATA'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+ENTER  . . . . . . . . . . . . .  	L NEAR	002A	CSEG
+EXIT . . . . . . . . . . . . . .  	L NEAR	0034	CSEG
+
+INPUT  . . . . . . . . . . . . .  	L NEAR	0009	CSEG
+
+POSITIVE . . . . . . . . . . . .  	L NEAR	001A	CSEG
+
+SCAN . . . . . . . . . . . . . .  	N PROC	0000	CSEG	Global	Length = 0035
+
+VVOD . . . . . . . . . . . . . .  	L BYTE	0000	DSEG
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  scan		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     48 Source  Lines
+     48 Total   Lines
+     15 Symbols
+
+  46704 + 441212 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

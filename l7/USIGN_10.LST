@@ -1,0 +1,76 @@
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-1
+
+
+       1				PUBLIC U10
+       2				
+       3 0000				CSEG	SEGMENT PARA PUBLIC 'CODE'
+       4						ASSUME CS:CSEG
+       5				
+       6 0000				U10	PROC NEAR
+       7 0000  55				PUSH BP
+       8 0001  8B EC				MOV  BP,SP
+       9 0003  8B 46 06				MOV  AX, [BP + 6]   ;x
+      10					
+      11 0006  B9 0000			        MOV CX,0      ;количество цифр 
+					в числе
+      12 0009  BB 000A			        MOV BX, 10
+      13				
+      14 000C				        BEGIN:
+      15 000C  BA 0000				    MOV DX,0
+      16 000F  F7 F3			            DIV BX        ;остаток в DX
+					, целая часть в AX
+      17 0011  83 C2 30			            ADD DX,'0'
+      18 0014  52			            PUSH DX       ;порядок цифр
+      19 0015  41			            INC CX
+      20 0016  3D 0000			            CMP AX,0
+      21 0019  75 F1			            JNE BEGIN
+      22 001B  B4 02			            MOV AH,2
+      23 001D				        PRINT:
+      24 001D  5A			            POP DX        ;достаем в об
+					ратном порядке
+      25 001E  CD 21			            INT 21h
+      26 0020  E2 FB			            LOOP PRINT
+      27						
+      28						
+      29 0022  5D				POP BP
+      30				
+      31 0023  C2 0004				RET 4
+      32 0026				U10	ENDP
+      33 0026				CSEG	ENDS
+      34				END
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	0026	PARA	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BEGIN  . . . . . . . . . . . . .  	L NEAR	000C	CSEG
+
+PRINT  . . . . . . . . . . . . .  	L NEAR	001D	CSEG
+
+U10  . . . . . . . . . . . . . .  	N PROC	0000	CSEG	Global	Length = 0026
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  usign_10		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     34 Source  Lines
+     34 Total   Lines
+     10 Symbols
+
+  46554 + 441362 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

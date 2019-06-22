@@ -1,0 +1,4 @@
+﻿  AsmLab8.cpp
+c:\users\novoc\source\repos\asmlab8\asmlab8\asmlab8.cpp(57): warning C4414: main: короткий переход к функции преобразован в ближний переход
+c:\users\novoc\source\repos\asmlab8\asmlab8\asmlab8.cpp(44): warning C4102: main: неиспользованная метка
+  AsmLab8.vcxproj -> C:\Users\novoc\source\repos\AsmLab8\Debug\AsmLab8.exe

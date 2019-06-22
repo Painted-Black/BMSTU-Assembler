@@ -1,0 +1,35 @@
+PUBLIC S2
+
+EXTRN  U2 : NEAR
+
+CSEG	SEGMENT PARA PUBLIC 'CODE'
+	ASSUME CS:CSEG
+		
+S2	PROC NEAR
+	PUSH BP
+	MOV  BP, SP
+		
+	MOV  CX, [BP + 4];знак
+	MOV  BX, [BP + 6];X
+		
+	CMP  CL, 0
+	JE   SKIP_NEG
+		
+	MOV  AH, 2
+	MOV  DL,'-'
+	INT  21H
+		
+	NEG  BX
+		
+SKIP_NEG:
+	PUSH BX
+	PUSH CX
+		
+	CALL U2
+		
+	POP BP
+
+	RET 4
+S2	ENDP
+CSEG	ENDS
+END

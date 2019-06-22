@@ -1,0 +1,74 @@
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-1
+
+
+       1				PUBLIC S16
+       2				
+       3				EXTRN  U16 : NEAR
+       4				
+       5 0000				CSEG	SEGMENT PARA PUBLIC 'CODE'
+       6					ASSUME CS:CSEG
+       7				
+       8						
+       9 0000				S16	PROC NEAR
+      10 0000  55				PUSH BP
+      11 0001  8B EC				MOV  BP, SP
+      12						
+      13 0003  8B 4E 04				MOV  CX, [BP + 4]
+      14 0006  8B 5E 06				MOV  BX, [BP + 6]
+      15						
+      16 0009  80 F9 00				CMP  CL, 0
+      17 000C  74 08				JE   SKIP_NEG
+      18						
+      19 000E  B4 02				MOV  AH, 2
+      20 0010  B2 2D				MOV  DL, '-'
+      21 0012  CD 21				INT  21H
+      22						
+      23 0014  F7 DB				NEG  BX
+      24						
+      25 0016				SKIP_NEG:
+      26 0016  53				PUSH  BX
+      27 0017  51				PUSH  CX
+      28						
+      29 0018  E8 0000 E			CALL  U16
+      30						
+      31 001B  5D				POP BP
+      32 001C  C2 0004				RET 4
+      33 001F				S16	ENDP
+      34					
+      35 001F				CSEG	ENDS
+      36				END
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	001F	PARA	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+S16  . . . . . . . . . . . . . .  	N PROC	0000	CSEG	Global	Length = 001F
+SKIP_NEG . . . . . . . . . . . .  	L NEAR	0016	CSEG
+
+U16  . . . . . . . . . . . . . .  	L NEAR	0000		External
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  sign_16		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     36 Source  Lines
+     36 Total   Lines
+     10 Symbols
+
+  46572 + 441344 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

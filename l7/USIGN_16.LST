@@ -1,0 +1,144 @@
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-1
+
+
+       1				PUBLIC U16
+       2				
+       3 0000				DSEG	SEGMENT PARA PUBLIC 'DATA'
+       4 0000  30 31 32 33 34 35	        SYMBOLS DB '0123456789ABCDEF'
+       5       36 37 38 39 41 42	
+       6       43 44 45 46		
+       7 0010  02				DELITEL db 2
+       8				
+       9 0011				DSEG	ENDS
+      10				
+      11 0000				CSEG	SEGMENT PARA PUBLIC 'CODE'
+      12						ASSUME CS:CSEG, DS:DSEG
+      13						
+      14 0000				U16	PROC NEAR
+      15 0000  55				PUSH BP
+      16 0001  56				PUSH SI
+      17 0002  8B EC				MOV  BP,SP
+      18 0004  8B 5E 08			    MOV  BX,[BP + 8]
+      19 0007  B1 04			    MOV  CL,4 ;цикл
+      20 0009  B9 0004				mov cx, 4
+      21 000C					BEGIN:
+      22 000C  33 C0					xor ax, ax
+      23 000E  B0 0F					mov al, 1111b
+      24						
+      25 0010  51					push cx
+      26 0011  B1 04					mov cl, 4
+      27 0013  D3 C3					rol bx, cl
+      28 0015  59					pop cx
+      29						
+      30 0016  22 C3					AND AL, bl
+      31 0018  8B F0					mov si, al
+usign_16.asm(29): warning A4031: Operand types must match
+      32						
+      33 001A  B4 02					MOV  AH,2
+      34 001C  8B 94 0000 R				MOV  DX,OFFSET SYMBOLS[
+					si]
+      35 0020  CD 21					INT  21H
+      36						
+      37 0022  33 C0					xor ax, ax
+      38 0024  B0 0F					mov al, 1111b
+      39 0026  E2 E4					loop BEGIN
+      40						
+      41						
+      42						
+      43						
+      44						
+      45						
+      46						;MOV  SI,15 ;начальное 
+					максимальное значение
+      47						;MOV  DX,0
+      48						;PUSH CX
+      49						;MOV  CX,4
+      50						;MOV  Dx,8  ;степень 2-
+					ки(3)
+      51						;SDVIG:
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Page     1-2
+
+
+      52							;ROL  BX,1 ;цик
+					лический сдвиг влево
+      53							;JC   NO_1     
+					;если 1
+      54							;SUB  si,Dx   ;
+					отнимаем степень
+      55						   ;NO_1:
+      56							;SHR  DX,1 ;Лог
+					ический сдвиг вправо
+      57							;LOOP SDVIG  ;в
+					нутренний цикл по 4 бита
+      58						;CMP  SI,0 
+      59						;JE   PRINT
+      60						;MOV  DI,1 ;первая 1-ца
+      61				
+      62					   ;PRINT:
+      63						;CMP  DI,0
+      64						;e   FIRST_0  ;не вывод
+					им незначащие нули 
+      65				
+      66						;MOV  AH,2
+      67						;MOV  DX,OFFSET SYMBOLS
+					[SI]
+      68						;INT  21H
+      69					   ;FIRST_0:
+      70						;POP  CX
+      71						;LOOP BEGIN
+      72					;CMP BX,0
+      73					;JNE EXIT
+      74					;MOV  AH,2
+      75					;MOV  DX,'0'
+      76					;INT  21H
+      77 0028				EXIT:
+      78 0028  5E			    POP SI
+      79 0029  5D				POP BP
+      80 002A  C2 0004				RET 4
+      81 002D				U16		ENDP
+      82						
+      83 002D				CSEG	ENDS
+      84				END
+Microsoft (R) Macro Assembler Version 5.10                  6/7/19 15:57:40
+
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	002D	PARA	PUBLIC	'CODE'
+DSEG . . . . . . . . . . . . . .  	0011	PARA	PUBLIC	'DATA'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BEGIN  . . . . . . . . . . . . .  	L NEAR	000C	CSEG
+
+DELITEL  . . . . . . . . . . . .  	L BYTE	0010	DSEG
+
+EXIT . . . . . . . . . . . . . .  	L NEAR	0028	CSEG
+
+SYMBOLS  . . . . . . . . . . . .  	L BYTE	0000	DSEG
+
+U16  . . . . . . . . . . . . . .  	N PROC	0000	CSEG	Global	Length = 002D
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  usign_16		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     82 Source  Lines
+     82 Total   Lines
+     14 Symbols
+
+  46514 + 439354 Bytes symbol space free
+
+      1 Warning Errors
+      0 Severe  Errors

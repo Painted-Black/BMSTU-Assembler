@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2019.04.16 12:52:11.299,=C:\Users\novoc\Desktop\asm\l10\lab\PPSTART.asm</Transaction>
+    <Transaction>2019.04.16 12:52:35.517,=C:\Users\novoc\Desktop\asm\l10\lab\COUNT.asm</Transaction>
+    <Transaction>2019.04.16 12:52:47.873,=C:\Users\novoc\Desktop\asm\l10\lab\SetCler.asm</Transaction>
+    <Transaction>2019.04.16 12:52:47.889,=C:\Users\novoc\Desktop\asm\l10\lab\X-Y.asm</Transaction>
+    <Transaction>2019.04.16 12:53:36.478,C:\Users\novoc\Desktop\asm\l10\lab\lab10.dproj=C:\Users\novoc\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

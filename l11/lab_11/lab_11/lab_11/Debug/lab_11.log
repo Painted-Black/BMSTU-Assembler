@@ -1,0 +1,3 @@
+﻿  lab_11.cpp
+c:\users\novoc\desktop\lab_11\lab_11\lab_11\lab_11.cpp(12): warning C4101: tempStr: неиспользованная локальная переменная
+  lab_11.vcxproj -> C:\Users\novoc\Desktop\lab_11\lab_11\Debug\lab_11.exe
